@@ -1,5 +1,6 @@
-import * as React from 'react'
 import { Query } from 'gqless'
+import * as React from 'react'
+
 import { useComponentContext } from '../hooks/useComponentContext'
 import { StackContext } from '../Query'
 import { useAccessors } from './useAccessors'
@@ -26,6 +27,8 @@ export const graphql = <Props extends any>(
     seperateRequest = false,
   }: IGraphQLOptions = {}
 ) => {
+  //@ts-ignore
+  console.log(30, component.getInitialProps)
   const query = new Query(name, false)
   const state: any[] = []
 
@@ -144,6 +147,11 @@ export const graphql = <Props extends any>(
 
   GraphQLComponent.displayName = name
   GraphQLComponent.query = query
+
+  GraphQLComponent.getInitialProps = async () => {
+    console.log(155)
+    return {}
+  }
 
   return GraphQLComponent
 }

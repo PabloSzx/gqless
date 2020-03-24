@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "watch": "tsdx watch",
+    "watch": "tsdx watch --noClean --onSuccess \"rsync -r dist ../../../next-typegraphql-api/gqlessreact\"",
     "build": "tsdx build",
     "test": "jest --env=jsdom"
   },
