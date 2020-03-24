@@ -17,7 +17,10 @@ export interface IGraphQLOptions {
    * null  | (default) inherited with React context
    */
   allowInheritance?: boolean | null
+  suspense?: boolean
 }
+
+const isClientSide = typeof window !== 'undefined'
 
 export const graphql = <Props extends any>(
   component: (props: Props) => any,
@@ -25,10 +28,9 @@ export const graphql = <Props extends any>(
     name = (component as any)?.displayName,
     allowInheritance = null,
     seperateRequest = false,
+    suspense = true,
   }: IGraphQLOptions = {}
 ) => {
-  //@ts-ignore
-  console.log(30, component.getInitialProps)
   const query = new Query(name, false)
   const state: any[] = []
 
@@ -134,12 +136,15 @@ export const graphql = <Props extends any>(
         throw promise
       }
 
-      return (
-        <>
-          {returnValue}
-          <Suspend />
-        </>
-      )
+      if (suspense && isClientSide) {
+        return (
+          <>
+            {returnValue}
+            <Suspend />
+          </>
+        )
+      }
+      return <>{returnValue}</>
     }
 
     return returnValue
@@ -148,9 +153,23 @@ export const graphql = <Props extends any>(
   GraphQLComponent.displayName = name
   GraphQLComponent.query = query
 
-  GraphQLComponent.getInitialProps = async () => {
-    console.log(155)
-    return {}
+  //@ts-ignore
+  const getInitialProps = component.getInitialProps
+
+  GraphQLComponent.getInitialProps = (ctx: any) => {
+    if (!isClientSide) {
+      React.createElement(ctx.AppTree)
+    }
+    // This object for props is needed to prevent a Next.js
+    // warning due to this function possibly returning an empty object
+    const gqlessProps = {
+      gqlessQueryName: query.toString(),
+    }
+    if (getInitialProps) {
+      return { ...gqlessProps, ...getInitialProps(ctx) }
+    }
+
+    return gqlessProps
   }
 
   return GraphQLComponent
