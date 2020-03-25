@@ -6,9 +6,15 @@ import { StackContext } from '../Query'
 import { useAccessors } from './useAccessors'
 import { useFragments, VariantContext } from './useFragments'
 
+/**
+ * Options of the gqless graphql HOC
+ *
+ * @export
+ * @interface IGraphQLOptions
+ */
 export interface IGraphQLOptions {
   name?: string
-  seperateRequest?: boolean
+  separateRequest?: boolean
   /**
    * Whether or not child components can use their own queries.
    *
@@ -17,6 +23,15 @@ export interface IGraphQLOptions {
    * null  | (default) inherited with React context
    */
   allowInheritance?: boolean | null
+  /**
+   * Whether to add or not suspense support
+   *
+   * true  | (default) add React Suspense
+   * false | disable React Suspense support
+   *
+   * @type {boolean}
+   * @memberof IGraphQLOptions
+   */
   suspense?: boolean
 }
 
@@ -33,7 +48,7 @@ export const graphql = <Props extends any>(
   {
     name = component?.displayName,
     allowInheritance = null,
-    seperateRequest = false,
+    separateRequest = false,
     suspense = true,
   }: IGraphQLOptions = {}
 ) => {
@@ -53,9 +68,9 @@ export const graphql = <Props extends any>(
           allowInheritance === null
             ? parentStack.inheritance
             : allowInheritance,
-        frames: seperateRequest ? [query] : [...parentStack.frames, query],
+        frames: separateRequest ? [query] : [...parentStack.frames, query],
       }
-    }, [seperateRequest || parentStack])
+    }, [separateRequest || parentStack])
 
     useComponentContext.value = {
       variantFragments: undefined!,
@@ -125,7 +140,7 @@ export const graphql = <Props extends any>(
     const promise = updateAccessors()
 
     // React suspense support
-    if (promise) {
+    if (isClientSide && suspense && promise) {
       let resolved = false
       promise.then(() => (resolved = true))
 
@@ -142,14 +157,12 @@ export const graphql = <Props extends any>(
         throw promise
       }
 
-      if (suspense && isClientSide) {
-        return (
-          <>
-            {returnValue}
-            <Suspend />
-          </>
-        )
-      }
+      return (
+        <>
+          {returnValue}
+          <Suspend />
+        </>
+      )
     }
 
     return returnValue
