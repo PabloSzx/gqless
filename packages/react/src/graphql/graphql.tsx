@@ -22,10 +22,16 @@ export interface IGraphQLOptions {
 
 const isClientSide = typeof window !== 'undefined'
 
+type IComponent<T> = {
+  (props: T): any
+  getInitialProps?: (ctx: any) => Record<any, any> | Promise<Record<any, any>>
+  displayName?: string
+}
+
 export const graphql = <Props extends any>(
-  component: (props: Props) => any,
+  component: IComponent<Props>,
   {
-    name = (component as any)?.displayName,
+    name = component?.displayName,
     allowInheritance = null,
     seperateRequest = false,
     suspense = true,
@@ -144,7 +150,6 @@ export const graphql = <Props extends any>(
           </>
         )
       }
-      return <>{returnValue}</>
     }
 
     return returnValue
@@ -153,23 +158,23 @@ export const graphql = <Props extends any>(
   GraphQLComponent.displayName = name
   GraphQLComponent.query = query
 
-  //@ts-ignore
-  const getInitialProps = component.getInitialProps
+  GraphQLComponent.getInitialProps = async (ctx: { AppTree: React.FC }) => {
+    let initialProps: Record<any, any>
 
-  GraphQLComponent.getInitialProps = (ctx: any) => {
-    if (!isClientSide) {
-      React.createElement(ctx.AppTree)
+    if (typeof component.getInitialProps === 'function') {
+      initialProps = await component.getInitialProps(ctx)
+    } else {
+      initialProps = {}
     }
-    // This object for props is needed to prevent a Next.js
+
+    if (!isClientSide && ctx?.AppTree) {
+      React.createElement(ctx.AppTree, initialProps)
+    }
+
+    // This gqlQueryName is needed to prevent a Next.js
     // warning due to this function possibly returning an empty object
-    const gqlessProps = {
-      gqlessQueryName: query.toString(),
-    }
-    if (getInitialProps) {
-      return { ...gqlessProps, ...getInitialProps(ctx) }
-    }
 
-    return gqlessProps
+    return { gqlessQueryName: query.toString(), ...initialProps }
   }
 
   return GraphQLComponent
