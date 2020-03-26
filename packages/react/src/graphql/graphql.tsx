@@ -6,12 +6,6 @@ import { StackContext } from '../Query'
 import { useAccessors } from './useAccessors'
 import { useFragments, VariantContext } from './useFragments'
 
-/**
- * Options of the gqless graphql HOC
- *
- * @export
- * @interface IGraphQLOptions
- */
 export interface IGraphQLOptions {
   name?: string
   separateRequest?: boolean
@@ -29,8 +23,6 @@ export interface IGraphQLOptions {
    * true  | (default) add React Suspense
    * false | disable React Suspense support
    *
-   * @type {boolean}
-   * @memberof IGraphQLOptions
    */
   suspense?: boolean
 }
@@ -54,6 +46,11 @@ export const graphql = <Props extends any>(
 ) => {
   const query = new Query(name, false)
   const state: any[] = []
+
+  let globalPromiseResolve: () => void
+  let globalPromise = new Promise<void>(resolve => {
+    globalPromiseResolve = resolve
+  })
 
   const GraphQLComponent = (props: Props) => {
     const parentVariant = React.useContext(VariantContext)
@@ -139,10 +136,13 @@ export const graphql = <Props extends any>(
 
     const promise = updateAccessors()
 
-    // React suspense support
-    if (isClientSide && suspense && promise) {
+    // React suspense support and Next.js SSR support
+    if (promise) {
       let resolved = false
-      promise.then(() => (resolved = true))
+      promise.then(() => {
+        globalPromiseResolve()
+        resolved = true
+      })
 
       // We can't directly throw the promise, otherwise
       // child components (with data requirements) won't
@@ -150,19 +150,23 @@ export const graphql = <Props extends any>(
       //
       // To prevent this we instead return a Fragment,
       // which contains a component that throws the Promise.
-      const Suspend = () => {
-        // This is necessary to prevent an infinite loop
-        if (resolved) return null
+      if (isClientSide && suspense) {
+        const Suspend = () => {
+          // This is necessary to prevent an infinite loop
+          if (resolved) return null
 
-        throw promise
+          throw promise
+        }
+
+        return (
+          <>
+            {returnValue}
+            <Suspend />
+          </>
+        )
       }
-
-      return (
-        <>
-          {returnValue}
-          <Suspend />
-        </>
-      )
+    } else {
+      globalPromiseResolve()
     }
 
     return returnValue
@@ -171,23 +175,39 @@ export const graphql = <Props extends any>(
   GraphQLComponent.displayName = name
   GraphQLComponent.query = query
 
-  GraphQLComponent.getInitialProps = async (ctx: { AppTree: React.FC }) => {
-    let initialProps: Record<any, any>
+  GraphQLComponent.getInitialProps = async <P extends Record<any, any>, C>(
+    ctx: C
+  ): Promise<
+    {
+      gqlessQuery: string
+    } & P
+  > => {
+    let initialProps: P
 
     if (typeof component.getInitialProps === 'function') {
       initialProps = await component.getInitialProps(ctx)
     } else {
-      initialProps = {}
+      initialProps = {} as P
     }
 
-    if (!isClientSide && ctx?.AppTree) {
-      React.createElement(ctx.AppTree, initialProps)
+    if (!isClientSide) {
+      // This process is needed to call the function that is going to
+      // make the render, call all the needed hooks and initiate
+      // the promise
+
+      const { renderToString } = await import('react-dom/server')
+
+      renderToString(React.createElement(GraphQLComponent, initialProps))
+
+      // And we await like Suspense would do for all the stuff to be done
+
+      await globalPromise
     }
 
-    // This gqlQueryName is needed to prevent a Next.js
+    // This gqlessQuery is needed to prevent a Next.js
     // warning due to this function possibly returning an empty object
 
-    return { gqlessQueryName: query.toString(), ...initialProps }
+    return { gqlessQuery: query.toString(), ...initialProps }
   }
 
   return GraphQLComponent
