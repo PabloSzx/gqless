@@ -2885,6 +2885,37 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@gqless/cli@^0.0.1-alpha.26":
+  version "0.0.1-alpha.30"
+  resolved "https://registry.yarnpkg.com/@gqless/cli/-/cli-0.0.1-alpha.30.tgz#a21af419fcf0d5f63f07466c4f54e5101b2cfab1"
+  integrity sha512-Bij/+2af9VugV95vUnZbfZj1YxUZp0cFjM+sMh69lpi2/dtz3HiDUqBzuQDPYAmPZPG7h+5H5rQBr0gvtH+hLQ==
+  dependencies:
+    "@endemolshinegroup/cosmiconfig-typescript-loader" "^1.0.1"
+    "@gqless/schema" "^0.0.1-alpha.28"
+    "@oclif/command" "^1.5.19"
+    "@oclif/config" "^1.14.0"
+    "@oclif/plugin-help" "^2.2.3"
+    cosmiconfig "^6.0.0"
+    got "^10.6.0"
+    mkdirp "^1.0.3"
+    prettier "^1.19.1"
+    tslib "^1.11.1"
+
+"@gqless/react@^0.0.1-alpha.26", "@gqless/react@^0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@gqless/react/-/react-0.0.1-alpha.28.tgz#34f6a483e2d3b7f9c2436bfdb4c2b4c564d149c0"
+  integrity sha512-eUxmAqh6BZ0ddCpuAicVDPaCWbOobWMhiSA+criQZpDEijiI94ubkKm/dPpTqmbKr2erMuZ4qzpH2JcVuN6DUg==
+  dependencies:
+    tslib "^1.11.1"
+
+"@gqless/schema@^0.0.1-alpha.26", "@gqless/schema@^0.0.1-alpha.28":
+  version "0.0.1-alpha.29"
+  resolved "https://registry.yarnpkg.com/@gqless/schema/-/schema-0.0.1-alpha.29.tgz#8b67e1534650a54b7fdfeccb206bc6517193e0c3"
+  integrity sha512-wn5DFWmX4WtIgEE2hlFVqsqAPj9XeplaujsKb6Qh79qu9yxm9E74xjd8ekOoz6rr57XT+FwjBB4+Gk20cHNXOQ==
+  dependencies:
+    "@gqless/utils" "^0.0.1-alpha.26"
+    tslib "^1.11.1"
+
 "@hapi/address@2.x.x":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.2.tgz#1c794cd6dbf2354d1eb1ef10e0303f573e1c7222"
@@ -4026,6 +4057,14 @@
   integrity sha512-t4ZD74UnNVMq6kZBDZceflRKK3q4o5PoCKMAGht0RK84W57tqonqKL3vCxJHtbGExdan9RwV8r7VJBZxIM1O7Q==
   dependencies:
     "@types/node" "^12.11.1"
+
+"@pablosz/gqless-schema@latest":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@pablosz/gqless-schema/-/gqless-schema-0.0.4.tgz#35dd5b52122ec2c26de69f3bcefecf3ceb1ff51d"
+  integrity sha512-el3tHYF9IAAw8VIolh3j69SSV1yUn8BUL6CceN6akhzvSh9Z3nMwK1WuVc4qnd/EC9/uwN3jb2azk6O8Zvymkg==
+  dependencies:
+    "@gqless/utils" "^0.0.1-alpha.26"
+    tslib "^1.11.1"
 
 "@parcel/fs@^1.11.0":
   version "1.11.0"

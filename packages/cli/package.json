@@ -3,7 +3,7 @@
   "private": false,
   "name": "@pablosz/gqless-cli",
   "description": "Codegen for gqless",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "author": "Sam Denty",
   "bin": {
     "gqless": "./bin/run"
@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@endemolshinegroup/cosmiconfig-typescript-loader": "^1.0.1",
-    "@pablosz/gqless-schema": "latest",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-help": "^2.2.3",
+    "@pablosz/gqless-schema": "latest",
     "cosmiconfig": "^6.0.0",
     "got": "^10.6.0",
     "mkdirp": "^1.0.3",

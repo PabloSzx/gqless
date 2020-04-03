@@ -1,5 +1,5 @@
 import { Config } from './config'
-import { Codegen, fetchSchema } from '@gqless/schema'
+import { Codegen, fetchSchema } from '@pablosz/gqless-schema'
 
 import { QueryFetcher } from 'gqless'
 import * as fs from 'fs'

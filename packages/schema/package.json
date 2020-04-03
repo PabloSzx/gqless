@@ -2,7 +2,7 @@
   "license": "MIT",
   "private": false,
   "name": "@pablosz/gqless-schema",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "source": "src/index.ts",
   "module": "dist/schema.esm.js",
