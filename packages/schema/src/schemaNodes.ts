@@ -12,7 +12,7 @@
 //   Node,
 //   UInputNode,
 //   Outputable,
-// } from 'gqless'
+// } from '@pablosz/gqless'
 // import { SchemaFieldArgs, Type, SchemaType, Schema } from './Schema'
 
 // export const schemaNodes = (schema: Schema) => {

@@ -10,7 +10,7 @@ import {
   fakeFieldResolver,
   // @ts-ignore
 } from 'graphql-faker/dist/fake_schema'
-import { QueryFetcher } from 'gqless'
+import { QueryFetcher } from '@pablosz/gqless'
 
 const SEED = 123
 

@@ -1,5 +1,5 @@
 import { schema } from '@internal/fixtures'
-import { Value } from 'gqless'
+import { Value } from '@pablosz/gqless'
 import { deepReference } from '../../src/Cache/utils'
 
 let rootValue: Value

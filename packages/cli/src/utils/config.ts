@@ -13,7 +13,7 @@ export interface Config {
   typescript?: boolean
 }
 
-const MODULE_NAME = 'gqless'
+const MODULE_NAME = '@pablosz/gqless'
 const defaultFileNames = [
   'package.json',
   `${MODULE_NAME}.config.json`,

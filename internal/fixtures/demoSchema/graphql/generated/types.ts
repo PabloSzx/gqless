@@ -5,7 +5,7 @@ import {
   FieldsTypeArg,
   ScalarType,
   EnumType,
-} from 'gqless'
+} from '@pablosz/gqless'
 
 type Extension<TName extends string> = TName extends keyof typeof extensions
   ? typeof extensions[TName]
@@ -23,9 +23,9 @@ type t_Query = FieldsType<
     string: t_String
     arrayOfObjects: FieldsTypeArg<
       { string?: string | null; input?: Input | null },
-      (t_Object)[]
+      t_Object[]
     >
-    arrayOfString: (t_String)[]
+    arrayOfString: t_String[]
     query: t_Query
   },
   Extension<'Query'>
@@ -83,7 +83,7 @@ type t___Schema = FieldsType<
     /**
      * A list of all types supported by this server.
      */
-    types: (t___Type)[]
+    types: t___Type[]
 
     /**
      * The type that query operations will be rooted at.
@@ -103,7 +103,7 @@ type t___Schema = FieldsType<
     /**
      * A list of all directives supported by this server.
      */
-    directives: (t___Directive)[]
+    directives: t___Directive[]
   },
   Extension<'__Schema'>
 >
@@ -120,15 +120,15 @@ type t___Type = FieldsType<
     description: t_String | null
     fields: FieldsTypeArg<
       { includeDeprecated?: boolean | null },
-      (t___Field)[] | null
+      t___Field[] | null
     >
-    interfaces: (t___Type)[] | null
-    possibleTypes: (t___Type)[] | null
+    interfaces: t___Type[] | null
+    possibleTypes: t___Type[] | null
     enumValues: FieldsTypeArg<
       { includeDeprecated?: boolean | null },
-      (t___EnumValue)[] | null
+      t___EnumValue[] | null
     >
-    inputFields: (t___InputValue)[] | null
+    inputFields: t___InputValue[] | null
     ofType: t___Type | null
   },
   Extension<'__Type'>
@@ -167,7 +167,7 @@ type t___Field = FieldsType<
     __typename: t_String<'__Field'>
     name: t_String
     description: t_String | null
-    args: (t___InputValue)[]
+    args: t___InputValue[]
     type: t___Type
     isDeprecated: t_Boolean
     deprecationReason: t_String | null
@@ -218,8 +218,8 @@ type t___Directive = FieldsType<
     __typename: t_String<'__Directive'>
     name: t_String
     description: t_String | null
-    locations: (t___DirectiveLocation)[]
-    args: (t___InputValue)[]
+    locations: t___DirectiveLocation[]
+    args: t___InputValue[]
   },
   Extension<'__Directive'>
 >

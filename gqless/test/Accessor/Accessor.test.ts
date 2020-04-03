@@ -1,4 +1,4 @@
-import { Variable } from 'gqless'
+import { Variable } from '@pablosz/gqless'
 import { snapshotAccessor } from './helpers'
 
 jest.useFakeTimers()

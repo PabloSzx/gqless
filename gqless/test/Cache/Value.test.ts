@@ -1,4 +1,4 @@
-import { Value } from 'gqless'
+import { Value } from '@pablosz/gqless'
 import { schema } from '@internal/fixtures'
 
 let value: Value

@@ -6,7 +6,7 @@ import {
   fragmentOn,
   FragmentAccessor,
   getAbstractImplementation,
-} from 'gqless'
+} from '@pablosz/gqless'
 import { useMemo } from 'react'
 import { useComponentMemo } from './useComponentMemo'
 

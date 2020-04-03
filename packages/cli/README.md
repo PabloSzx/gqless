@@ -20,7 +20,7 @@ $ npm install -g @pablosz/gqless-cli
 $ gqless COMMAND
 running command...
 $ gqless (-v|--version|version)
-@pablosz/gqless-cli/0.0.5 linux-x64 node-v13.8.0
+@pablosz/gqless-cli/0.0.9 linux-x64 node-v13.8.0
 $ gqless --help [COMMAND]
 USAGE
   $ gqless COMMAND
@@ -57,7 +57,7 @@ EXAMPLES
   $ gqless generate -c gqless.config.ts
 ```
 
-_See code: [dist/commands/generate.js](https://github.com/samdenty/gqless/blob/v0.0.5/dist/commands/generate.js)_
+_See code: [dist/commands/generate.js](https://github.com/samdenty/gqless/blob/v0.0.9/dist/commands/generate.js)_
 
 ## `gqless help [COMMAND]`
 

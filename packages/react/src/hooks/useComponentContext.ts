@@ -1,4 +1,10 @@
-import { Query, Accessor, Fragment, ObjectNode, Scheduler } from 'gqless'
+import {
+  Query,
+  Accessor,
+  Fragment,
+  ObjectNode,
+  Scheduler,
+} from '@pablosz/gqless'
 import { StackContext } from '../Query'
 import { invariant } from '@gqless/utils'
 

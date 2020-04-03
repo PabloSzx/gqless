@@ -5,7 +5,7 @@ import {
   Arguments,
   ArgumentsField,
   ArrayNode,
-} from 'gqless'
+} from '@pablosz/gqless'
 import { schema } from '@internal/fixtures'
 
 it('works with normal objects', () => {

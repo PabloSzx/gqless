@@ -1,4 +1,4 @@
-import { getAccessor } from 'gqless'
+import { getAccessor } from '@pablosz/gqless'
 import { create } from './helpers'
 
 jest.useFakeTimers()

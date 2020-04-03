@@ -1,4 +1,4 @@
-import { getAccessor, getAbstractImplementation } from 'gqless'
+import { getAccessor, getAbstractImplementation } from '@pablosz/gqless'
 import { useComponentContext } from '../hooks/useComponentContext'
 
 export function ofType<

@@ -1,4 +1,4 @@
-import { Selection, Fragment } from 'gqless'
+import { Selection, Fragment } from '@pablosz/gqless'
 
 import { Path, Preview, Tree, TreeItem } from './components'
 import * as React from './jsx'

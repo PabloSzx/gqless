@@ -1,4 +1,4 @@
-import { INDEX } from 'gqless'
+import { INDEX } from '@pablosz/gqless'
 
 export const Query = () => ({
   object: () => ({

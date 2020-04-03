@@ -1,4 +1,4 @@
-import { preload } from 'gqless'
+import { preload } from '@pablosz/gqless'
 import * as React from 'react'
 import { query } from './client'
 import testDefault, { Test, test } from './test2'

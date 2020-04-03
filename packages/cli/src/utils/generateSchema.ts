@@ -1,7 +1,7 @@
 import { Config } from './config'
 import { Codegen, fetchSchema } from '@pablosz/gqless-schema'
 
-import { QueryFetcher } from 'gqless'
+import { QueryFetcher } from '@pablosz/gqless'
 import * as fs from 'fs'
 import * as prettier from 'prettier'
 import * as mkdirp from 'mkdirp'

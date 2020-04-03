@@ -1,4 +1,4 @@
-import { Accessor, NetworkStatus } from 'gqless'
+import { Accessor, NetworkStatus } from '@pablosz/gqless'
 import { useMemo, useEffect } from 'react'
 import { useForceUpdate } from '../hooks/useForceUpdate'
 import { StackContext } from '../Query'

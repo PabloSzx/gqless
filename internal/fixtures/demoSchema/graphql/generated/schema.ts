@@ -11,7 +11,7 @@ import {
   EnumNode,
   InputNode,
   InputNodeField,
-} from 'gqless'
+} from '@pablosz/gqless'
 
 export const schema = {
   get Query() {

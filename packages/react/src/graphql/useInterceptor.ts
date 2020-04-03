@@ -1,4 +1,4 @@
-import { Accessor, Interceptor, Scheduler } from 'gqless'
+import { Accessor, Interceptor, Scheduler } from '@pablosz/gqless'
 import { StackContext } from '../Query'
 
 export const useInterceptor = (stack: StackContext) => {

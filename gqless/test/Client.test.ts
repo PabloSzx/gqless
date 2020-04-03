@@ -1,5 +1,5 @@
 import { createGraphQL } from '@internal/fixtures'
-import { Client, Variable } from 'gqless'
+import { Client, Variable } from '@pablosz/gqless'
 
 jest.useFakeTimers()
 

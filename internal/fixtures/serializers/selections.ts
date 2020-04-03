@@ -1,4 +1,4 @@
-import { Accessor, Selection } from 'gqless'
+import { Accessor, Selection } from '@pablosz/gqless'
 
 export const print = (
   val: Selection | Accessor,

@@ -1,6 +1,6 @@
 import './loadFormatters'
 import { parse, stringify } from 'flatted'
-import { Client, QueryResponse, Plugin, PluginMethod } from 'gqless'
+import { Client, QueryResponse, Plugin, PluginMethod } from '@pablosz/gqless'
 
 const format = (...parts: any[][]) => {
   const texts: string[] = []

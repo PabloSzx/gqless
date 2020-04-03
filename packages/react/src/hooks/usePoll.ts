@@ -1,4 +1,4 @@
-import { getAccessor, Poller } from 'gqless'
+import { getAccessor, Poller } from '@pablosz/gqless'
 import { useEffect, useMemo, useState } from 'react'
 import { useComponentContext } from './useComponentContext'
 

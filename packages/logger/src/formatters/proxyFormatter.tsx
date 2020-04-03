@@ -1,4 +1,4 @@
-import { ACCESSOR } from 'gqless'
+import { ACCESSOR } from '@pablosz/gqless'
 
 import * as React from './jsx'
 

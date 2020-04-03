@@ -1,4 +1,4 @@
-import { Plugins } from 'gqless'
+import { Plugins } from '@pablosz/gqless'
 
 it('supports calling all plugins', () => {
   const plugins = new Plugins()

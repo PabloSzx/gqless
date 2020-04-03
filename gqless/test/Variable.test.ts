@@ -1,4 +1,4 @@
-import { Variable } from 'gqless'
+import { Variable } from '@pablosz/gqless'
 
 it(`doesn't allow setting to null, if non-nullable`, () => {
   expect(() => new Variable(null, { nullable: false })).toThrow()

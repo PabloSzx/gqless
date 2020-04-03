@@ -1,4 +1,4 @@
-import { Query } from 'gqless'
+import { Query } from '@pablosz/gqless'
 import * as React from 'react'
 
 import { useComponentContext } from '../hooks/useComponentContext'
