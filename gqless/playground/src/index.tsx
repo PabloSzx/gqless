@@ -1,7 +1,3 @@
-;(window as any).__DEV__ = process.env.NODE_ENV === 'development'
-
-import '@babel/polyfill'
-
 import { Logger } from '@gqless/logger'
 import { parse, stringify } from 'flatted'
 import {
@@ -48,8 +44,8 @@ async function bootstrap() {
       usePoll(query.users, 1000)
       return (
         <div>
-          {query.users.map(u => {
-            return <div key={u.id}>{u.name}</div>
+          {query.users.map(user => {
+            return <div key={user.id}>{user.name}</div>
           })}
         </div>
       )

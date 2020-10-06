@@ -18,5 +18,4 @@ export class IndexFile extends File {
 
 export * from './extensions'
 export * from './client'
-
 export { generated }

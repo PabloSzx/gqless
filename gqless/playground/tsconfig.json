@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "include": ["src", "types"],
+  "references": [
+    { "path": "../../gqless" },
+    { "path": "../../packages/logger" },
+    { "path": "../../packages/schema" },
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/react" }
+  ]
+}

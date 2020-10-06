@@ -1,19 +1,7 @@
-import { SchemaType, Type, SchemaFieldArgs, SchemaField } from '../../../Schema'
-import {
-  ObjectNode,
-  ArrayNode,
-  ScalarNode,
-  InputNode,
-  InputNodeField,
-  InterfaceNode,
-  UnionNode,
-  Arguments,
-  ArgumentsField,
-  FieldNode,
-  EnumNode,
-} from 'gqless'
-import { File, UTILS, CORE } from '../../File'
+import { SchemaType, SchemaField } from '../../../Schema'
+import { File } from '../../File'
 import { Codegen } from '../../Codegen'
+import _ from 'lodash'
 
 export const SCHEMA_VAR = 'schema'
 
@@ -23,162 +11,105 @@ export class SchemaFile extends File {
   }
 
   public generate() {
-    this.importAll(`../extensions`, 'extensions')
-    this.import(UTILS, 'lazyGetters')
-
-    const body = `
-      export const ${SCHEMA_VAR} = ${this.generateSchema()}
-
-      lazyGetters(${SCHEMA_VAR})
-    `
+    this.import(`gqless`, 'createSchema')
+    const types = Object.values(this.codegen.schema.types)
 
     return `
-      // @ts-nocheck
       ${super.generate()}
 
-      ${body}
+      ${types
+        .map(type => {
+          if (type.kind !== 'ENUM') return
+          return `\nexport enum ${type.name} {${type.enumValues.join(',\n')}}`
+        })
+        .filter(Boolean)
+        .join('\n')}
+
+      export const ${SCHEMA_VAR} = createSchema({
+        ${['query', 'mutation']
+          .map(name => {
+            const value = (this.codegen.schema as any)[name + 'Type']
+            if (!value) return
+
+            return (
+              `/** The root ${name} type **/\n` +
+              `$${name}: ${JSON.stringify(value)},`
+            )
+          })
+          .filter(Boolean)
+          .join('\n')}
+
+        ${types
+          .map(type => {
+            if (type.kind === 'ENUM') {
+              return `\n${type.name}`
+            }
+
+            const definition = this.generateType(type)
+            if (!definition) return
+
+            return `${this.generateTypeComments(type, true)}${
+              type.name
+            }: ${definition}`
+          })
+          .filter(Boolean)
+          .join(',\n')}
+      } as const)
     `
   }
 
-  private generateSchema() {
-    return `{
-      ${Object.values(this.codegen.schema.types)
-        .map(
-          type => `get ${type.name}() {
-            return ${this.generateNode(type)}
-          }`
-        )
-        .join(',')}
-    }`
-  }
-
-  private getNode(name: string) {
-    return `${SCHEMA_VAR}.${name}`
-  }
-
-  private getExtension(name: string) {
-    if (this.codegen.options.typescript) {
-      return `(extensions as any || {}).${name}`
+  private generateFieldComments(field: SchemaField) {
+    const comments: string[] = []
+    if (field.isDeprecated) {
+      comments.push(
+        `@deprecated${
+          field.deprecationReason
+            ? ` ${field.deprecationReason.replace(/\n/gm, ' ')}`
+            : ''
+        }`
+      )
     }
 
-    // || {} is used to confuse webpack which displays errors if you don't export an extension
-    return `(extensions || {}).${name}`
+    if (field.description) {
+      comments.push(...field.description.split('\n'))
+    }
+
+    return this.generateComments(comments)
   }
 
-  private generateFieldGetter(field: SchemaField) {
-    this.import(CORE, FieldNode.name)
+  private generateField(field: SchemaField): string {
+    const data = this.generateRef(field.type)
 
-    return `get ${field.name}() {
-      return new ${FieldNode.name}(${this.generateType(
-      field.type
-    )}, ${this.generateArguments(field.args)}, ${field.type.nullable})
+    return `${this.generateFieldComments(field)}${field.name}: ${
+      field.args
+        ? `[${data}, {${Object.entries(field.args)
+            .map(([name, type]) => this.generateField({ name, type }))
+            .join(',')}}]`
+        : data
     }`
   }
 
-  private generateNode(type: SchemaType) {
+  private generateType(type: SchemaType): string | void {
     switch (type.kind) {
-      case 'OBJECT': {
-        this.import(CORE, ObjectNode.name)
-
-        return `new ${ObjectNode.name}({
-          ${Object.values(type.fields)
-            .map(field => this.generateFieldGetter(field))
-            .join(',')}
-        }, { name: ${JSON.stringify(type.name)}, extension: ${this.getExtension(
-          type.name
-        )} })`
-      }
-
+      case 'OBJECT':
+      case 'INPUT_OBJECT':
       case 'INTERFACE': {
-        this.import(CORE, InterfaceNode.name)
-
-        return `new ${InterfaceNode.name}({
+        const fields = `{
           ${Object.values(type.fields)
-            .map(field => this.generateFieldGetter(field))
+            .map(field => this.generateField(field))
             .join(',')}
-        },
-        [${type.possibleTypes.map(type => this.getNode(type)).join(',')}],
-        { name: ${JSON.stringify(type.name)}, extension: ${this.getExtension(
-          type.name
-        )} })`
+        }`
+        if (type.kind === 'INTERFACE') {
+          return `[${fields}, ${type.possibleTypes
+            .map(type => JSON.stringify(type))
+            .join(',')}]`
+        }
+        return fields
       }
 
       case 'UNION': {
-        this.import(CORE, UnionNode.name)
-
-        return `new ${UnionNode.name}([${type.possibleTypes.map(type =>
-          this.getNode(type)
-        )}])`
-      }
-
-      case 'SCALAR': {
-        this.import(CORE, ScalarNode.name)
-
-        return `new ${ScalarNode.name}({ name: ${JSON.stringify(
-          type.name
-        )}, extension: ${this.getExtension(type.name)} })`
-      }
-
-      case 'INPUT_OBJECT': {
-        this.import(CORE, InputNode.name)
-
-        return `new ${InputNode.name}({
-          ${Object.values(type.inputFields)
-            .map(field => {
-              this.import(CORE, InputNodeField.name)
-
-              return `get ${field.name}() {
-                return new ${InputNodeField.name}(${this.generateType(
-                field.type
-              )}, ${field.type.nullable})
-              }`
-            })
-            .join(',')}
-        }, ${JSON.stringify({ name: type.name })})`
-      }
-
-      case 'ENUM': {
-        this.import(CORE, EnumNode.name)
-
-        return `new ${EnumNode.name}({ name: ${JSON.stringify(type.name)} })`
+        return `[${type.possibleTypes.map(type => JSON.stringify(type))}]`
       }
     }
-
-    return undefined
-  }
-
-  private generateType(type: Type): string {
-    this.import(CORE, ArrayNode.name)
-
-    if (type.kind === 'LIST') {
-      return `new ${ArrayNode.name}(${this.generateType(type.ofType)}, ${
-        type.nullable
-      })`
-    }
-
-    return this.getNode(type.name)
-  }
-
-  public generateArguments(args?: SchemaFieldArgs) {
-    if (!args) return undefined
-
-    this.import(CORE, Arguments.name)
-
-    const argsRequired = !Object.values(args).find(arg => arg.nullable)
-      ? ', true'
-      : ''
-
-    return `new ${Arguments.name}({
-      ${Object.entries(args)
-        .map(([name, type]) => {
-          this.import(CORE, ArgumentsField.name)
-
-          return `get ${name}() {
-            return new ${ArgumentsField.name}(${this.generateType(type)}, ${
-            type.nullable
-          })}`
-        })
-        .join(',')}
-    }${argsRequired})`
   }
 }

@@ -8,7 +8,7 @@ export class ClientFile extends File {
 
   public generate() {
     this.import(CORE, 'Client', 'QueryFetcher')
-    this.import('./generated', 'schema', this.codegen.schema.queryType)
+    this.import('./schema', 'schema', this.codegen.schema.queryType)
 
     return `
       ${super.generate()}
@@ -20,9 +20,11 @@ export class ClientFile extends File {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',${
-              this.codegen.options.headers ? Object.entries(this.codegen.options.headers).map(
-                ([key, value]) => `'${key}': '${value}'`
-              ).join('\n') : ''
+              this.codegen.options.headers
+                ? Object.entries(this.codegen.options.headers)
+                    .map(([key, value]) => `'${key}': '${value}'`)
+                    .join('\n')
+                : ''
             }
           },
           body: JSON.stringify({
@@ -43,7 +45,7 @@ export class ClientFile extends File {
 
       export const client = new Client<${
         this.codegen.schema.queryType
-      }>(schema.${this.codegen.schema.queryType}, fetchQuery)
+      }>(schema, fetchQuery)
 
       export const query = client.query
     `
