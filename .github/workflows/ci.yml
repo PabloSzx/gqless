@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -42,19 +42,7 @@ jobs:
 
       - name: Setup
         run: |
-          npm install -g yarn
-          yarn
+          yarn --frozen-lockfile
           yarn bootstrap
-
-#      - name: Jest
-#        env:
-#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-#        run: |
-#          yarn test --coverage
-#
-#      - name: Upload to codecov
-#        continue-on-error: true
-#        env:
-#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-#        run: |
-#          yarn codecov
+      - name: Test
+        run: yarn test --coverage
