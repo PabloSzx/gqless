@@ -42,9 +42,9 @@
   "dependencies": {
     "@graphql-codegen/core": "^1.17.10",
     "@graphql-codegen/typescript": "^1.22.1",
-    "@graphql-tools/delegate": "^7.1.2",
-    "@graphql-tools/utils": "^7.7.3",
-    "@graphql-tools/wrap": "^7.0.5",
+    "@graphql-tools/delegate": "^7.1.5",
+    "@graphql-tools/utils": "^7.10.0",
+    "@graphql-tools/wrap": "^7.0.8",
     "@pablosz/gqless": "workspace:^2.0.15",
     "commander": "^7.2.0",
     "cosmiconfig": "^7.0.0",
