@@ -57,7 +57,7 @@
     "@types/react-dom": "^17.0.3",
     "@types/rimraf": "^3.0.0",
     "@types/tsc-watch": "^4.2.0",
-    "@types/wait-on": "^5.2.0",
+    "@types/wait-on": "^5.3.0",
     "@types/ws": "^7.4.4",
     "bob-esbuild-cli": "^0.1.26",
     "concurrently": "^6.0.2",
