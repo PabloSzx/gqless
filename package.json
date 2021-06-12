@@ -52,7 +52,7 @@
     "@types/node": "^14.14.41",
     "bob-esbuild": "^0.1.26",
     "bob-esbuild-cli": "^0.1.26",
-    "concurrently": "^6.0.2",
+    "concurrently": "^6.2.0",
     "fkill": "^7.1.1",
     "husky": "^6.0.0",
     "prettier": "^2.2.1",

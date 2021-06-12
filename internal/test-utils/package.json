@@ -42,7 +42,7 @@
     "@size-limit/preset-small-lib": "^4.10.2",
     "@types/randomstring": "^1.1.6",
     "bob-esbuild-cli": "^0.1.26",
-    "concurrently": "^6.0.2",
+    "concurrently": "^6.2.0",
     "rimraf": "^3.0.2",
     "size-limit": "^4.10.2",
     "tslib": "^2.2.0",
