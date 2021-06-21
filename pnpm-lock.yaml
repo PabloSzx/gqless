@@ -374,7 +374,7 @@ importers:
       react-use: ^17.2.4
       regenerator-runtime: ^0.13.7
       rimraf: ^3.0.2
-      serve: ^11.3.2
+      serve: ^12.0.0
       typedoc: ^0.20.37
       typedoc-plugin-markdown: ^3.10.0
       typescript: ^4.2.4
@@ -407,7 +407,7 @@ importers:
       react-use: 17.2.4_react-dom@17.0.2+react@17.0.2
       regenerator-runtime: 0.13.7
       rimraf: 3.0.2
-      serve: 11.3.2
+      serve: 12.0.0
       typedoc: 0.20.37_typescript@4.3.4
       typedoc-plugin-markdown: 3.10.0_typedoc@0.20.37
       typescript: 4.3.4
@@ -436,7 +436,7 @@ importers:
       open-cli: ^6.0.1
       prettier: ^2.2.1
       rimraf: ^3.0.2
-      serve: ^11.3.2
+      serve: ^12.0.0
       size-limit: ^4.12.0
       test-utils: workspace:^0.1.0
       tmp-promise: ^3.0.2
@@ -463,7 +463,7 @@ importers:
       graphql: 15.5.1
       open-cli: 6.0.1
       rimraf: 3.0.2
-      serve: 11.3.2
+      serve: 12.0.0
       size-limit: 4.12.0
       test-utils: link:../../internal/test-utils
       tmp-promise: 3.0.2
@@ -502,7 +502,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       rimraf: ^3.0.2
-      serve: ^11.3.2
+      serve: ^12.0.0
       size-limit: ^4.12.0
       test-utils: workspace:^0.1.0
       tsc-watch: ^4.4.0
@@ -542,7 +542,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       rimraf: 3.0.2
-      serve: 11.3.2
+      serve: 12.0.0
       size-limit: 4.12.0
       test-utils: link:../../internal/test-utils
       tsc-watch: 4.4.0_typescript@4.3.4
@@ -7394,14 +7394,6 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  /ajv/6.5.3:
-    resolution: {integrity: sha512-LqZ9wY+fx3UMiiPd741yB2pj3hhil+hQc8taf4o2QGRFpWgZ2V5C8HA165DY9sS3fJwsk7uT7ZlFEyC3Ig3lLg==}
-    dependencies:
-      fast-deep-equal: 2.0.1
-      fast-json-stable-stringify: 2.1.0
-      json-schema-traverse: 0.4.1
-      uri-js: 4.4.1
-
   /ajv/8.6.0:
     resolution: {integrity: sha512-cnUG4NSBiM4YFBxgZIj/In3/6KX+rQ2l2YPRVcvAMQGWEPKuXoPIhxzwqh31jA3IPbI4qEOp/5ILI4ynioXsGQ==}
     dependencies:
@@ -8477,7 +8469,7 @@ packages:
     dependencies:
       ansi-align: 2.0.0
       camelcase: 4.1.0
-      chalk: 2.4.1
+      chalk: 2.4.2
       cli-boxes: 1.0.0
       string-width: 2.1.1
       term-size: 1.2.0
@@ -9273,12 +9265,13 @@ packages:
     dev: false
     optional: true
 
-  /clipboardy/1.2.3:
-    resolution: {integrity: sha512-2WNImOvCRe6r63Gk9pShfkwXsVtKCroMAevIbiae021mS850UkWPbevxsBz3tnvjZIEGvlwaqCPsw+4ulzNgJA==}
-    engines: {node: '>=4'}
+  /clipboardy/2.3.0:
+    resolution: {integrity: sha512-mKhiIL2DrQIsuXMgBgnfEHOZOryC7kY7YO//TN6c63wlEm3NG5tz+YgY5rVi29KCmq/QQjKYvM7a19+MDOTHOQ==}
+    engines: {node: '>=8'}
     dependencies:
       arch: 2.2.0
-      execa: 0.8.0
+      execa: 1.0.0
+      is-wsl: 2.2.0
 
   /cliui/5.0.0:
     resolution: {integrity: sha512-PYeGSEmmHM6zvoef2w8TPzlrnNpXIjTipYK780YswmIP9vjxmd6Y2a3CB2Ks6/AU8NHjZugXvo8w3oWM2qnwXA==}
@@ -11554,18 +11547,6 @@ packages:
       signal-exit: 3.0.3
       strip-eof: 1.0.0
 
-  /execa/0.8.0:
-    resolution: {integrity: sha1-2NdrvBtVIX7RkP1t1J08d07PyNo=}
-    engines: {node: '>=4'}
-    dependencies:
-      cross-spawn: 5.1.0
-      get-stream: 3.0.0
-      is-stream: 1.1.0
-      npm-run-path: 2.0.2
-      p-finally: 1.0.0
-      signal-exit: 3.0.3
-      strip-eof: 1.0.0
-
   /execa/1.0.0:
     resolution: {integrity: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==}
     engines: {node: '>=6'}
@@ -11760,9 +11741,6 @@ packages:
   /fast-decode-uri-component/1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}
     dev: false
-
-  /fast-deep-equal/2.0.1:
-    resolution: {integrity: sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=}
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
@@ -20495,16 +20473,16 @@ packages:
       send: 0.17.1
     dev: false
 
-  /serve/11.3.2:
-    resolution: {integrity: sha512-yKWQfI3xbj/f7X1lTBg91fXBP0FqjJ4TEi+ilES5yzH0iKJpN5LjNb1YzIfQg9Rqn4ECUS2SOf2+Kmepogoa5w==}
+  /serve/12.0.0:
+    resolution: {integrity: sha512-BkTsETQYynAZ7rXX414kg4X6EvuZQS3UVs1NY0VQYdRHSTYWPYcH38nnDh48D0x6ONuislgjag8uKlU2gTBImA==}
     hasBin: true
     dependencies:
       '@zeit/schemas': 2.6.0
-      ajv: 6.5.3
+      ajv: 6.12.6
       arg: 2.0.0
       boxen: 1.3.0
       chalk: 2.4.1
-      clipboardy: 1.2.3
+      clipboardy: 2.3.0
       compression: 1.7.3
       serve-handler: 6.1.3
       update-check: 1.5.2
