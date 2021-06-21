@@ -1,5 +1,11 @@
 # gqless
 
+## 2.0.16
+
+### Patch Changes
+
+- cdcd961: improve build & support ESM
+
 ## 2.0.15
 
 ### Patch Changes
