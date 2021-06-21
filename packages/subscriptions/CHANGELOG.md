@@ -1,5 +1,13 @@
 # @pablosz/gqless-subscriptions
 
+## 1.0.13
+
+### Patch Changes
+
+- cdcd961: improve build & support ESM
+- Updated dependencies [cdcd961]
+  - @pablosz/gqless@2.0.16
+
 ## 1.0.12
 
 ### Patch Changes

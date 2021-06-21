@@ -1,5 +1,13 @@
 # @pablosz/gqless-react
 
+## 2.0.17
+
+### Patch Changes
+
+- cdcd961: improve build & support ESM
+- Updated dependencies [cdcd961]
+  - @pablosz/gqless@2.0.16
+
 ## 2.0.16
 
 ### Patch Changes

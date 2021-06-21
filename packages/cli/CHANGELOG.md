@@ -1,5 +1,13 @@
 # @pablosz/gqless-cli
 
+## 2.0.19
+
+### Patch Changes
+
+- cdcd961: improve build & support ESM
+- Updated dependencies [cdcd961]
+  - @pablosz/gqless@2.0.16
+
 ## 2.0.18
 
 ### Patch Changes
