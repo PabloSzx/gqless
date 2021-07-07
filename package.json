@@ -55,7 +55,7 @@
     "concurrently": "^6.2.0",
     "fkill": "^7.1.1",
     "husky": "^6.0.0",
-    "prettier": "^2.3.1",
+    "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1",
     "rimraf": "^3.0.2"
   },
