@@ -56,7 +56,7 @@
     "@size-limit/preset-small-lib": "^4.12.0",
     "@types/mkdirp": "^1.0.1",
     "bob-esbuild-cli": "^0.1.27",
-    "changesets-github-release": "^0.0.1",
+    "changesets-github-release": "^0.1.0",
     "graphql": "^15.5.1",
     "open-cli": "^6.0.1",
     "rimraf": "^3.0.2",
