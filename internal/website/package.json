@@ -26,7 +26,7 @@
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "cross-env": "^7.0.3",
-    "docusaurus-plugin-typedoc": "^0.12.1",
+    "docusaurus-plugin-typedoc": "^0.17.5",
     "file-loader": "^6.2.0",
     "framer-motion": "^4.1.17",
     "globby": "^11.0.4",
