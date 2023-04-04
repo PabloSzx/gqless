@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@graphql-codegen/core": "^1.17.10",
-    "@graphql-codegen/typescript": "^1.22.2",
+    "@graphql-codegen/typescript": "^1.23.0",
     "@graphql-tools/delegate": "^7.1.5",
     "@graphql-tools/utils": "^7.10.0",
     "@graphql-tools/wrap": "^7.0.8",
